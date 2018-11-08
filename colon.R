@@ -6,4 +6,4 @@ load("Data/gset.RData")
 
 # Read in data using only 146 significant genes
 
-pamoutput <- read.csv("desousaemelo_146genes_pam.csv", header = TRUE)
+pamoutput <- read.csv("Data/desousaemelo_146genes_pam.csv", header = TRUE)
