@@ -2,7 +2,7 @@
 
 # Load gene expression data
 
-load("gset.RData")
+load("Data/gset.RData")
 
 # Read in data using only 146 significant genes
 
