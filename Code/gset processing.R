@@ -1,5 +1,8 @@
 ##### Data Sourcing and Pre-processing ###########
-library(Biobase)
+
+source("http://bioconductor.org/biocLite.R")
+biocLite("GEOquery")
+
 library(GEOquery)
 
 # Load series and platform data from GEO
