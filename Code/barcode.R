@@ -16,15 +16,16 @@ gset <- gset[,!(sampleNames(gset) %in% healthy)]
 
 biocLite("frma")
 biocLite("hgu133afrmavecs")
+biocLite("hgu133plus2frmavecs")
 
 library(frma)
 library(hgu133afrmavecs)
+library(hgu133plus2frmavecs)
 
 # Run barcode algorithm
 
 barcode <- barcode(gset, platform = "GPL570")
-barcode <- exprs(barcode)
 
 # Save as .RData
 
-save(barcode, file = "Data/gset.RData")
+save(barcode, file = "barcode.RData")
