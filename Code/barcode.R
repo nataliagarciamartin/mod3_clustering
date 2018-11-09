@@ -12,12 +12,20 @@ gset <- getGEO("GSE33113")[[1]]
 healthy <- c("GSM1100477", "GSM1100478", "GSM1100479", "GSM1100480", "GSM1100481", "GSM1100482")
 gset <- gset[,!(sampleNames(gset) %in% healthy)]
 
-# Extract gene expression information
-gset <- exprs(gset)
+# Install frma packages
 
-# Check first 5 genes for 4 subjects
-gset[1:5,1:4]
+biocLite("frma")
+biocLite("hgu133afrmavecs")
+biocLite("hgu133plus2frmavecs")
+
+library(frma)
+library(hgu133afrmavecs)
+library(hgu133plus2frmavecs)
+
+# Run barcode algorithm
+
+barcode <- barcode(gset, platform = "GPL570")
 
 # Save as .RData
 
-save(gset, file = "gset.RData")
+save(barcode, file = "barcode.RData")
