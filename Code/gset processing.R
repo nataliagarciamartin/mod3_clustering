@@ -21,3 +21,9 @@ gset[1:5,1:4]
 # Save as .RData
 
 save(gset, file = "gset.RData")
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> db8ed5d4f2418ce41b72ed4464db4e11838ad340
