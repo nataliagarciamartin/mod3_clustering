@@ -9,6 +9,10 @@ library(affy)
 # Import .CEL files as an AffyBatch; need .CEL files in current working directory
 affset <- ReadAffy()
 
+# Install fRMA package
+biocLite("frma")
+library(frma)
+
 # Perform fRMA to obtain gene expressions
 fraffset <- frma(affset)
 
@@ -55,3 +59,10 @@ for (i in 1:nrow(affset_sub)){
 }
 
 sum(variability2 > 0.5)
+
+mad_remove <- c(variability2 > 0.5)
+mad_affset <- affset_sub[mad_remove,]
+dim(mad_affset)
+
+mad_gset <- mad_affset
+save(mad_gset, file = "mad_gset.RData")
