@@ -2,8 +2,8 @@
 
 # Load gene expression data
 
-load("Data/gset.RData")
-load("Data/barcode.RData")
+load("Data/frma_gset.RData")
+load("Data/barcode_sub.RData")
 
 # Read in data using only 146 significant genes
 
