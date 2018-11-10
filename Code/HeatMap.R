@@ -17,7 +17,7 @@ heat <- t(heat) #transpose so we cluster the patients, not the genes
 
 
 
-#k means
+#k means #most similar to figure 1.b
 kclus <- kmeans(heat, 3)
 kclus$cluster
 
