@@ -17,7 +17,7 @@ kmeans
 pam1 <- function(x, k){list(cluster = pam(x,k, cluster.only=TRUE))} 
 
 hier <- function(x, k){
-d <-dist(x, method = "average", diag = FALSE, upper = FALSE, p = 2)
+d <- dist(t(x))
 hclus <- hclust(d)
 groups<- cutree(hclus, k=k)
 groups$cluster <- groups
@@ -27,7 +27,7 @@ groups <- as.list(groups)
 # Compute gap statistic
 
 set.seed(123)
-gap_stat <- clusGap(data, FUN = hier, K.max = 5, B = 10)
+gap_stat <- clusGap(x, FUN = hier, K.max = 5, B = 10)
 
 # Plot gap statistic
 
