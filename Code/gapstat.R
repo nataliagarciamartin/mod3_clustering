@@ -36,3 +36,8 @@ gap <- gap_stat$Tab[,3]
 plot(x, gap, type="b", xlab="Number of clusters", ylab="Gap statistic") #+ geom_line() + geom_point(size=5) + geom_errorbar(aes(ymax=gap+gap_stat$Tab[,4], ymin=gap-gap_stat$Tab[,4]))
 
      
+# Hierarchical clustering
+
+dmat <- dist(t(mad_gset)) # mad_gset is data in this script
+htest <- hclust(dmat, method = "average")
+plot(htest)
