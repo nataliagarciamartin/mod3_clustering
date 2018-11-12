@@ -14,7 +14,7 @@ biocLite("frma")
 library(frma)
 
 # Perform fRMA to obtain gene expressions
-fraffset <- frma(affset)
+fraffset <- frma(affset, summarize = "random_effect")
 
 # Extract the gene expressions
 newaffset <- exprs(fraffset)
@@ -22,8 +22,8 @@ head(newaffset)
 dim(newaffset)
 
 # Remove the healthy individuals
-healthy2 <- c("GSM1100477_COL_27.CEL.gz", "GSM1100478_COL_28.CEL.gz", "GSM1100479_COL_29.CEL.gz", "GSM1100480_COL_30.CEL.gz", "GSM1100481_COL_31.CEL.gz", "GSM1100482_COL_32.CEL.gz")
-newaffset <- newaffset[,!(colnames(newaffset) %in% healthy2)]
+# healthy2 <- c("GSM1100477_COL_27.CEL.gz", "GSM1100478_COL_28.CEL.gz", "GSM1100479_COL_29.CEL.gz", "GSM1100480_COL_30.CEL.gz", "GSM1100481_COL_31.CEL.gz", "GSM1100482_COL_32.CEL.gz")
+# newaffset <- newaffset[,!(colnames(newaffset) %in% healthy2)]
 
 frma_gset <- newaffset
 save(frma_gset, file = "frma_gset.RData")
