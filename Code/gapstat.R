@@ -4,9 +4,10 @@ library(cluster)
 
 # Select which data
 
-data <- mad_gset # final 8000
-data <- gset # all data
-data <- t(scale(t(data))) #mad data already normalised but gset data is not
+data<- barcode_sub
+#data <- mad_gset # final 8000
+#data <- gset # all data
+#data <- t(scale(t(data))) #mad data already normalised but gset data is not
 data <- t(data) #transpose so we cluster the patients, not the genes
 
 # Select clustering strategy and create function if necessary 
@@ -17,7 +18,7 @@ kmeans
 pam1 <- function(x, k){list(cluster = pam(x,k, cluster.only=TRUE))} 
 
 hier <- function(x, k){
-d <- dist(t(x))
+d <- dist(x)
 hclus <- hclust(d)
 groups<- cutree(hclus, k=k)
 groups$cluster <- groups

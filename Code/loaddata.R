@@ -12,7 +12,7 @@ pamoutput <- read.csv("Data/desousaemelo_146genes_pam.csv", header = TRUE)
 
 # Subset with 146 genes
 
-x146<- gset[as.character(pamoutput$identifier),]
-x146 <- as.data.frame(x146)
+x146<- frma_gset[as.character(pamoutput$identifier),]
+x146 <- as.matrix(x146)
 save(x146, file = "Data/x146.RData")
 
