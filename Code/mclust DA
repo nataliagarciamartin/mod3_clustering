@@ -1,0 +1,17 @@
+
+data = x146
+
+install.packages('mclust')
+
+library(mclust)
+
+
+
+MclustDA(data, class, G = NULL, modelNames = NULL, 
+         modelType = c("MclustDA", "EDDA"), 
+         prior = NULL, 
+         control = emControl(), 
+         initialization = NULL, 
+         warn = mclust.options("warn"), 
+         verbose = interactive(),
+         ...)
