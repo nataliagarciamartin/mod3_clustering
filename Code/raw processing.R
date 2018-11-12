@@ -65,4 +65,12 @@ mad_affset <- affset_sub[mad_remove,]
 dim(mad_affset)
 
 mad_gset <- mad_affset
+
+for (i in 1:nrow(mad_gset)){
+  
+  mad_gset[i,] <- mad_gset[i,] - median(mad_gset[i,])
+  
+}
+
 save(mad_gset, file = "mad_gset.RData")
+
