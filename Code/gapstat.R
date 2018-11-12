@@ -17,7 +17,7 @@ kmeans
 pam1 <- function(x, k){list(cluster = pam(x,k, cluster.only=TRUE))} 
 
 hier <- function(x, k){
-d <-dist(x, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
+d <-dist(x, method = "average", diag = FALSE, upper = FALSE, p = 2)
 hclus <- hclust(d)
 groups<- cutree(hclus, k=k)
 groups$cluster <- groups
