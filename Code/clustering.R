@@ -5,7 +5,7 @@ library(ConsensusClusterPlus)
 title=tempdir()
 
 results = ConsensusClusterPlus(mad_gset, maxK=3, reps=1000, pItem=0.98, pFeature=1, distance="pearson", seed=5, clusterAlg="hc",plot="pdf")
-results[[3]]$consensusClass  # class results for 3 clusters
+hier__cons_class <- results[[3]]$consensusClass  # class results for 3 clusters
 
 
 # Consensus with k means
@@ -17,7 +17,7 @@ results2[[3]]$consensusClass  # class results for 3 clusters
 
 # Hierarchical
 
-d <-dist(t(x146), method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
+d <-dist(t(mad_gset), method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
 hclus <- hclust(d)
 groups<-cutree(hclus, k=3) 
 
@@ -27,5 +27,5 @@ groups<-cutree(hclus, k=3)
 
 # K means
 
-kclus <- kmeans(heat, 3)
+kclus <- kmeans(t(mad_gset), 3)
 kclus$cluster
