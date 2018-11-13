@@ -1,7 +1,7 @@
 library(ConsensusClusterPlus)
 
 title=tempdir()
-results = ConsensusClusterPlus(mad_gset, maxK=10, reps=1000, pItem=0.98, pFeature=1, distance="pearson", seed=5, clusterAlg="hc",plot="pdf")
+results = ConsensusClusterPlus(mad_gset, maxK=15, reps=1000, pItem=0.98, pFeature=1, distance="pearson", seed=5, clusterAlg="hc",plot="pdf")
 icl = calcICL(results)
 icl[["clusterConsensus"]]
 icl[["itemConsensus"]][1:5,]
