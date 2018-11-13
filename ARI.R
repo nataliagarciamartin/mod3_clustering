@@ -18,48 +18,15 @@ sum(results[[3]]$consensusClass==3)/90
 labels = results[[3]]$consensusClass  # class results for 3 clusters
 
 
-# PAM Classifier
 
-# PAM
-
-#install package from zip file
-
-#library(pamr)
-
-# For Interactive analysis, use:
-#pamr.menu(mad_gset)
+install.packages('clues')
 
 
-#Non-interactive analysis
-
-## Train the classifier
-x = mad_gset
-y = labels
-
-my_mad_gset = list(x=x, y = factor(y))
-
-gset.train <- pamr.train(my_mad_gset)
-
-#Results of gset.train
-
-gset.train
+library(clues)
 
 
-## Cross-validate the classifier
-# pamr carries out cross-validation for a nearest shrunken centroid classifier.
-gset.train.cv<- pamr.cv(gset.train, my_mad_gset)
+#Computing the Adjusted Rand Index between PAM cluster and hc consensus clusters
 
-#View cross-validation results
+adjustedRand(labels, as.vector(my_y_hat)) #0.8947617
 
-gset.train.cv
-
-# Plotting the cross-validated error curves
-
-pamr.plotcv(gset.train.cv)
-
-# Make a gene plot of the most significant genes
-
-pamr.geneplot(gset.train, my_mad_gset, threshold=5.3)
-
-#List the most significant genes
-pamr.listgenes(gset.train,  my_mad_gset, threshold=3.0, genenames = T)
+#We make use of HA
