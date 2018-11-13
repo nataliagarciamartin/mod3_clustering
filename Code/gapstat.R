@@ -4,8 +4,8 @@ library(cluster)
 
 # Select which data
 
-data<- barcode_sub
-#data <- mad_gset # final 8000
+data <- affset_sub
+data <- mad_gset # final 8000
 #data <- gset # all data
 #data <- t(scale(t(data))) #mad data already normalised but gset data is not
 data <- t(data) #transpose so we cluster the patients, not the genes
@@ -15,25 +15,24 @@ data <- t(data) #transpose so we cluster the patients, not the genes
 
 kmeans
 
-pam1 <- function(x, k){list(cluster = pam(x,k, cluster.only=TRUE))} 
+pam1 <- function(x, k){list(cluster = pam(x, k, cluster.only = TRUE))} 
 
 hier <- function(x, k){
 d <- dist(x)
 hclus <- hclust(d)
-groups<- cutree(hclus, k=k)
-groups$cluster <- groups
-groups <- as.list(groups)
+groups <- cutree(hclus, k = k)
+groups <- list(cluster = groups)
 }
 
 # Compute gap statistic
 
 set.seed(123)
-gap_stat <- clusGap(x, FUN = hier, K.max = 5, B = 10)
+gap_stat <- clusGap(data, FUN = hier, K.max = 15, B = 50)
 
 # Plot gap statistic
 
-x=1:5
-gap <- gap_stat$Tab[,3]
+x <- 2:15
+gap <- gap_stat$Tab[,3][2:15]
 plot(x, gap, type="b", xlab="Number of clusters", ylab="Gap statistic") #+ geom_line() + geom_point(size=5) + geom_errorbar(aes(ymax=gap+gap_stat$Tab[,4], ymin=gap-gap_stat$Tab[,4]))
 
      

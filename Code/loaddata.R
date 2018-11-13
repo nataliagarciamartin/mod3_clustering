@@ -3,7 +3,7 @@
 # Load gene expression data
 
 load("Data/frma_gset.RData") # Full data after processing via fRMA
-load("Data/barcode_sub.RData") # Subset of data after application of the barcode algorithm
+load("Data/affset_sub.RData") # Subset of data after application of the barcode algorithm
 load("Data/mad_gset.RData") # Subset of barcode_sub after assessing median absolute deviance
 
 # Read in data using only 146 significant genes

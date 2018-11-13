@@ -46,12 +46,12 @@ remove <- c(nbcode_gset != 0)
 barcode_sub <- newbarcode[remove,]
 dim(barcode_sub)
 
-save(barcode_sub, file = "barcode_sub.RData")
-
-# Assess median absolute deviation
-
 affset_sub <- newaffset[remove,]
 dim(affset_sub)
+
+save(affset_sub, file = "affset_sub.RData")
+
+# Assess median absolute deviation
 
 variability2 <- rep(0, nrow(affset_sub))
 for (i in 1:nrow(affset_sub)){
