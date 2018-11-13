@@ -1,13 +1,8 @@
-
-install.packages("cluster")
 library(cluster)
 
 # Select which data
 
 data <- affset_sub
-data <- mad_gset # final 8000
-#data <- gset # all data
-#data <- t(scale(t(data))) #mad data already normalised but gset data is not
 data <- t(data) #transpose so we cluster the patients, not the genes
 
 # Select clustering strategy and create function if necessary 
@@ -27,14 +22,15 @@ groups <- list(cluster = groups)
 # Compute gap statistic
 
 set.seed(123)
-gap_stat <- clusGap(data, FUN = hier, K.max = 15, B = 50)
+
+gap_stat <- clusGap(data, FUN = hier, K.max = 15, B = 100)
 
 # Plot gap statistic
 
 x <- 2:15
 gap <- gap_stat$Tab[,3][2:15]
-plot(x, gap, type="b", xlab="Number of clusters", ylab="Gap statistic") #+ geom_line() + geom_point(size=5) + geom_errorbar(aes(ymax=gap+gap_stat$Tab[,4], ymin=gap-gap_stat$Tab[,4]))
-
+gap_norm <- gap/ gap_stat$Tab[,3][2]
+plot(x, gap_norm, type = "b", xlab = "Number of Clusters", ylab="Gap Statistic", main = "Gap Statistic for Different Cluster Sizes") 
      
 # Hierarchical clustering
 
