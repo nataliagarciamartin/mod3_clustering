@@ -10,13 +10,23 @@ require(cluster)
 
 heat=t(x146)
 
-# Heatmap
+# Code to produce heatmap with 90 patients and 146 classifying genes 
+
+#hierarchical
 
 d <-dist(heat, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
 hclus <- hclust(d, method="average")
 groups<-cutree(hclus, k=3) # output labels from hierarchical clustering
-split <- paste0("Cluster\n")
 
+#hierarchical with consensus 
+
+heat=t(x146)
+results = ConsensusClusterPlus(mad_gset, maxK=10, reps=1000, pItem=0.98, pFeature=1, distance="pearson", seed=5, clusterAlg="hc",plot="pdf")
+groups <- results[[3]]$consensusClass
+
+# plot heatmap
+
+split <- paste0("Cluster\n")
 split <- factor(paste0("Cluster\n", groups), levels=c("Cluster\n3","Cluster\n2","Cluster\n1"), labels = c("CCS3", "CCS2", "CCS1"))
 reorder.hmap <- Heatmap(heat, split=split,
                         name="Transcript Z-score",
@@ -39,7 +49,7 @@ reorder.hmap <- Heatmap(heat, split=split,
                         column_dend_height=unit(30,"mm"))
 draw(reorder.hmap)
 
-# heatmap.2
+# produce a different layout using heatmap.2
 
 quantile.range <- quantile(x146, probs = seq(0, 1, 0.01))
 palette.breaks <- seq(quantile.range["5%"], quantile.range["95%"], 0.1)
