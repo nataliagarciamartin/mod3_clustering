@@ -38,7 +38,7 @@ library(pamr)
 x = mad_gset
 y = labels
 
-my_mad_gset = list(x=x, y = y, geneids=paste("ID",1:7747,sep=""))
+my_mad_gset = list(x=x, y = y, geneids=paste("g",as.character(1:nrow(x)),sep=""))
 
 gset.train <- pamr.train(my_mad_gset)
 
@@ -81,9 +81,28 @@ gset.train$yhat$`4.625` #predicted classes using pam with threshold set as 4.625
 
 gene_names = attr(y, "names")
 
-my_y_hat = setNames(gset.train$yhat$`4.625`, gene_names)
+my_y_hat = setNames(gset.train$yhat$`4.625`, gene_names) #Predicted cluster assignments by PAM
 
-head(my_y_hat)
 
-class(my_y_hat)
+pamr.confusion(gset.train, threshold = 4.625, extra = T)
+
+
+#Producing a display of the significant genes
+
+pdf("sig_genes.pdf")
+par(mar = rep(2,4))
+pamr.geneplot(gset.train, my_mad_gset, threshold = 4.625)
+dev.off()
+
+
+#Predict clusters for 'unseen' data.
+#'unseen' here is mad_gset
+
+pamr_predictions = pamr.predict(gset.train, mad_gset, threshold = 4.625, type = c("class"))
+
+#Transforming into desirable form to be used in the AdjustedRand function
+pamr_predictions = setNames(pamr_predictions, gene_names) 
+
+
+
 
