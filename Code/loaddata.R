@@ -16,3 +16,8 @@ x146<- frma_gset[as.character(pamoutput$identifier),]
 x146 <- as.matrix(x146)
 save(x146, file = "Data/x146.RData")
 
+for (i in 1:nrow(x146)){
+  
+  x146[i,] <- x146[i,] - median(x146[i,])
+  
+}
